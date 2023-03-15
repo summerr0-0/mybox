@@ -7,4 +7,8 @@ public class UserService {
     public boolean isFull(Long userId) {
         return false;
     }
+
+    public boolean isExistUser(Long userId) {
+        return false;
+    }
 }

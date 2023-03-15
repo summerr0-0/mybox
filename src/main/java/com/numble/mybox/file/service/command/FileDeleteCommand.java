@@ -1,4 +1,5 @@
 package com.numble.mybox.file.service.command;
 
-public record FileDeleteCommand() {
+public record FileDeleteCommand(Long userId, Long fileId) {
+
 }

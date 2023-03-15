@@ -1,4 +1,4 @@
-package com.numble.mybox.file.entity;
+package com.numble.mybox.file.domain;
 
 import com.numble.mybox.common.entity.BaseTimeEntity;
 import jakarta.persistence.Entity;

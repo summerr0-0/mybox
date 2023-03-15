@@ -17,9 +17,16 @@ public class FileController {
 
     private final FileService service;
 
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping("create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public EmptyResponse fileUpload(@RequestBody @Valid FileUploadRequest request) {
+        service.fileUpload(FileUploadCommand.of(request));
+        return new EmptyResponse.Ok<>();
+    }
+
+    @PostMapping("delete")
+    @ResponseStatus(HttpStatus.OK)
+    public EmptyResponse fileDelete(@RequestBody @Valid FileUploadRequest request) {
         service.fileUpload(FileUploadCommand.of(request));
         return new EmptyResponse.Ok<>();
     }
