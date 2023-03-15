@@ -1,0 +1,22 @@
+package com.numble.mybox.common.controller.response;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class Meta {
+    private final String result;
+    private final String errorCode;
+    private final String errorMessage;
+
+    public static class Ok extends Meta {
+        public Ok() {
+            super("ok", null, null);
+        }
+    }
+
+    public static class Fail extends Meta {
+        public Fail(String errorCode, String errorMessage) {
+            super("fail", errorCode, errorMessage);
+        }
+    }
+}
