@@ -3,14 +3,13 @@ package com.numble.mybox.file.service;
 import com.numble.mybox.common.event.Events;
 import com.numble.mybox.common.event.FileDeletedEvent;
 import com.numble.mybox.common.event.FileUploadedEvent;
-import com.numble.mybox.file.domain.FileRepository;
+import com.numble.mybox.file.infra.repository.FileRepository;
 import com.numble.mybox.file.service.command.FileDeleteCommand;
 import com.numble.mybox.file.service.command.FileDownloadCommand;
 import com.numble.mybox.file.service.command.FileUploadCommand;
 import com.numble.mybox.file.service.exception.FullStorageException;
 import com.numble.mybox.user.service.UserService;
 import com.numble.mybox.user.service.exception.UserNotFoundException;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -47,6 +46,9 @@ public class FileService {
         }
 
         Events.raise(new FileDeletedEvent(command));
+    }
+    //todo 알집다운
+    public void fileDownload(FileDownloadCommand command){
 
     }
 

@@ -17,7 +17,7 @@ public class FileController {
 
     private final FileService service;
 
-    @PostMapping("create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
     public EmptyResponse fileUpload(@RequestBody @Valid FileUploadRequest request) {
         service.fileUpload(FileUploadCommand.of(request));

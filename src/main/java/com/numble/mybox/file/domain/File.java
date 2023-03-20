@@ -14,6 +14,21 @@ public class File extends BaseTimeEntity {
     Long id;
     Long userId;
     String name;
-    String folder;
+    String path;
+    Long folderId;
+    Long size;
+
+
+    public static File of(Long userId, String name, String path, Long folderId, Long size) {
+        return new File(userId, name, path, folderId, size);
+    }
+
+    private File(Long userId, String name, String path, Long folderId, Long size) {
+        this.userId = userId;
+        this.name = name;
+        this.path = path;
+        this.folderId = folderId;
+        this.size = size;
+    }
 
 }
