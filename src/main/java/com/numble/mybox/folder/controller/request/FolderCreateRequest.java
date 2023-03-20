@@ -1,4 +1,4 @@
 package com.numble.mybox.folder.controller.request;
 
-public record FolderCreateRequest() {
+public record FolderCreateRequest(Long userId, Long parentFolderId) {
 }
