@@ -3,6 +3,7 @@ package com.numble.mybox.folder.service;
 import com.numble.mybox.common.event.UserJoinedEvent;
 import com.numble.mybox.folder.entity.Folder;
 import com.numble.mybox.folder.infra.repository.FolderRepository;
+import com.numble.mybox.folder.service.command.FolderCreateCommand;
 import com.numble.mybox.user.domain.User;
 import com.numble.mybox.user.infra.repository.UserRepository;
 import com.numble.mybox.user.service.exception.UserNotFoundException;
@@ -20,5 +21,8 @@ public class FolderService {
     public void rootCreate(UserJoinedEvent event) {
         User user = userRepository.findByUserId(event.getUserId()).orElseThrow(UserNotFoundException::new);
         fileRepository.save(Folder.createRoot(user.getId()));
+    }
+
+    public void createFolder(FolderCreateCommand of) {
     }
 }
