@@ -1,7 +1,12 @@
 package com.numble.mybox.user.infra.repository;
 
-import com.numble.mybox.user.entity.User;
+import com.numble.mybox.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User,Long> {
+import java.util.Optional;
+
+public interface
+
+UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUserId(String userId);
 }

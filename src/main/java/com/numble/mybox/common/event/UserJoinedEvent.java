@@ -1,18 +1,24 @@
 package com.numble.mybox.common.event;
 
+import com.numble.mybox.user.service.command.UserCreateCommand;
 import lombok.Getter;
 
 @Getter
 public class UserJoinedEvent {
     private final String userId;
-    private final String userName;
+    private final String name;
+    private final String password;
 
-    public static UserJoinedEvent of(String userId, String userName) {
-        return new UserJoinedEvent(userId, userName);
+    public static UserJoinedEvent of(UserCreateCommand command) {
+        return new UserJoinedEvent(
+            command.userId(),
+            command.name(),
+            command.password());
     }
 
-    private UserJoinedEvent(String userId, String userName) {
+    public UserJoinedEvent(String userId, String name, String password) {
         this.userId = userId;
-        this.userName = userName;
+        this.name = name;
+        this.password = password;
     }
 }
