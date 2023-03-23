@@ -1,8 +1,10 @@
 package com.numble.mybox.common.controller.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class Meta {
     private final String result;
     private final String errorCode;
