@@ -15,11 +15,10 @@ import org.springframework.transaction.event.TransactionalEventListener;
 public class UserCreateHandler {
     private final UserService service;
 
-    @EventListener(UserJoinedEvent.class)
     @Order(1)
-    @TransactionalEventListener
+    @TransactionalEventListener(UserJoinedEvent.class)
     public void handle(UserJoinedEvent event) {
-        log.info("UserJoinedEvent :: RootCreateHandler");
+        log.info("UserJoinedEvent :: UserCreateHandler");
         service.userCreate(event);
     }
 

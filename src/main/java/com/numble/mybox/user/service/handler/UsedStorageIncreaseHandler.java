@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class UsedStorageIncreaseHandler {
-    UserService userService;
+    private final UserService userService;
     @EventListener(FileUploadedEvent.class)
     public void handle(FileUploadedEvent event) {
         log.info("FileUploadedEvent :: UsedStorageIncreaseHandler start");
 
         //event처리
-        userService.updateStorage(event.getUserId(), event.getFile().getSize());
+        userService.useStorage(event.getUserId(), event.getFile().getSize());
     }
 
 }
