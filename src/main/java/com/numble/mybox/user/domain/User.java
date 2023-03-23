@@ -4,6 +4,7 @@ import com.numble.mybox.common.entity.BaseTimeEntity;
 import com.numble.mybox.common.event.UserJoinedEvent;
 import com.numble.mybox.common.value.Unit;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,15 +16,16 @@ import static com.numble.mybox.common.value.Unit.GB;
 @NoArgsConstructor
 public class User extends BaseTimeEntity {
     @Id
-    Long id;
+    @GeneratedValue
+    private Long id;
 
-    String name;
+    private String name;
 
-    String userId;
+    private String userId;
 
-    String password;
-    Long capacity;
-    Long usedCapacity;
+    private String password;
+    private Long capacity;
+    private Long usedCapacity;
 
     public static User of(UserJoinedEvent event) {
         return new User(
