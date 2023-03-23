@@ -23,7 +23,9 @@ public class UserService {
         //id검사하기
         Events.raise(UserJoinedEvent.of(command));
     }
-    public void updateStorage(Long userId, Long size) {
+    public void useStorage(Long id, Long size) {
+        User user = repository.findById(id).orElseThrow(UserNotFoundException::new);
+        user.updateStorage(size);
 
     }
 

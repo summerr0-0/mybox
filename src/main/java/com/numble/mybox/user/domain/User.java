@@ -44,4 +44,8 @@ public class User extends BaseTimeEntity {
         this.capacity = capacity;
         this.usedCapacity = usedCapacity;
     }
+
+    public void updateStorage(Long size) {
+        this.usedCapacity +=size;
+    }
 }

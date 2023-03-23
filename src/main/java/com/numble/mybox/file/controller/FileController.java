@@ -19,7 +19,7 @@ public class FileController {
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public EmptyResponse fileUpload(@RequestBody @Valid FileUploadRequest request) {
+    public EmptyResponse fileUpload(@Valid FileUploadRequest request) {
         service.fileUpload(FileUploadCommand.of(request));
         return new EmptyResponse.Ok<>();
     }

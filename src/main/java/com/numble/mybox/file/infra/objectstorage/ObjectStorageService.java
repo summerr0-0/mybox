@@ -61,7 +61,7 @@ public class ObjectStorageService {
 
         //create file
 
-        String fileName = folderName + "/" + UUID.randomUUID();
+        String fileName = folderName  + UUID.randomUUID();
         File convertFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
         try {
             if (convertFile.createNewFile()) {
