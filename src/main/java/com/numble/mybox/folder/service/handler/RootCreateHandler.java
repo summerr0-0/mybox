@@ -15,9 +15,8 @@ import org.springframework.transaction.event.TransactionalEventListener;
 public class RootCreateHandler {
 
     FolderService service;
-    @EventListener(UserJoinedEvent.class)
     @Order(2)
-    @TransactionalEventListener
+    @TransactionalEventListener(UserJoinedEvent.class)
     public void handle(UserJoinedEvent event) {
         log.info("UserJoinedEvent :: RootCreateHandler");
         service.rootCreate(event);
