@@ -5,6 +5,7 @@ import com.numble.mybox.common.event.UserJoinedEvent;
 import com.numble.mybox.user.domain.User;
 import com.numble.mybox.user.infra.repository.UserRepository;
 import com.numble.mybox.user.service.command.UserCreateCommand;
+import com.numble.mybox.user.service.exception.UserAlreadyExistException;
 import com.numble.mybox.user.service.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,13 +21,15 @@ public class UserService {
 
     @Transactional
     public void join(UserCreateCommand command) {
-        //id검사하기
+        repository.findByUserId(command.userId()).ifPresent(a-> {throw new UserAlreadyExistException();});
+        repository.save(User.of(command));
         Events.raise(UserJoinedEvent.of(command));
     }
+
+    @Transactional
     public void useStorage(Long id, Long size) {
         User user = repository.findById(id).orElseThrow(UserNotFoundException::new);
         user.updateStorage(size);
-
     }
 
     public boolean isFull(Long userId) {
@@ -36,11 +39,5 @@ public class UserService {
     public boolean isExistUser(Long userId) {
         return true;
     }
-
-    @Transactional
-    public void userCreate(UserJoinedEvent event){
-        repository.save(User.of(event));
-    }
-
 
 }

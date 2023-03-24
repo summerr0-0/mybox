@@ -1,8 +1,7 @@
 package com.numble.mybox.user.domain;
 
 import com.numble.mybox.common.entity.BaseTimeEntity;
-import com.numble.mybox.common.event.UserJoinedEvent;
-import com.numble.mybox.common.value.Unit;
+import com.numble.mybox.user.service.command.UserCreateCommand;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,11 +27,11 @@ public class User extends BaseTimeEntity {
     private Long capacity;
     private Long usedCapacity;
 
-    public static User of(UserJoinedEvent event) {
+    public static User of(UserCreateCommand command) {
         return new User(
-            event.getName(),
-            event.getUserId(),
-            event.getPassword(),
+            command.name(),
+            command.userId(),
+            command.password(),
             30 * GB,
             0L);
     }
