@@ -26,8 +26,7 @@ public class UserService {
         Events.raise(UserJoinedEvent.of(command));
     }
 
-    @Transactional
-    public void useStorage(Long id, Long size) {
+    public void updateStorage(Long id, Long size) {
         User user = repository.findById(id).orElseThrow(UserNotFoundException::new);
         user.updateStorage(size);
     }
@@ -37,6 +36,7 @@ public class UserService {
     }
 
     public boolean isExistUser(Long userId) {
+
         return true;
     }
 

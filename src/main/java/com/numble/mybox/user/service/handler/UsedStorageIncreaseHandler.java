@@ -16,7 +16,7 @@ public class UsedStorageIncreaseHandler {
         log.info("FileUploadedEvent :: UsedStorageIncreaseHandler start");
 
         //event처리
-        userService.useStorage(event.getUserId(), event.getFile().getSize());
+        userService.updateStorage(event.getUserId(), event.getFile().getSize());
     }
 
 }

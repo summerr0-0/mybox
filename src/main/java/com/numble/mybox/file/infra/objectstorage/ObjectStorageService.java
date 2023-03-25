@@ -6,7 +6,11 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.*;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.numble.mybox.file.infra.FileProcessService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +25,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 @Component
-public class ObjectStorageService {
+public class ObjectStorageService implements FileProcessService {
     @Value("${objects-storage.endPoint}")
     private String endPoint;
     @Value("${objects-storage.regionName}")
