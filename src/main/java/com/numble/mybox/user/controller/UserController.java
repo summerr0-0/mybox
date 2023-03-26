@@ -1,7 +1,9 @@
 package com.numble.mybox.user.controller;
 
 import com.numble.mybox.common.controller.response.EmptyResponse;
+import com.numble.mybox.common.controller.response.SingleResponse;
 import com.numble.mybox.user.controller.request.UserCreateRequest;
+import com.numble.mybox.user.controller.response.UserSearchResponse;
 import com.numble.mybox.user.service.UserService;
 import com.numble.mybox.user.service.command.UserCreateCommand;
 import jakarta.validation.Valid;
@@ -20,5 +22,12 @@ public class UserController {
     public EmptyResponse createUser(@RequestBody @Valid UserCreateRequest request) {
         service.join(UserCreateCommand.of(request));
         return new EmptyResponse.Ok<>();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public SingleResponse<UserSearchResponse> searchUser(@PathVariable Long id) {
+        UserSearchResponse response = service.findUser(id);
+        return new SingleResponse.Ok<>(response);
     }
 }

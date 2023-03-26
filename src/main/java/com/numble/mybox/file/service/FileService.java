@@ -23,27 +23,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class FileService {
-
     private final UserService userService;
     private final FileRepository fileRepository;
     private final FileProcessService fileProcessService;
-
 
     @Transactional
     public void fileUpload(FileUploadCommand command) {
         //todo security 적용하면 변경해야 한다
         if (!userService.isExistUser(command.userId())) throw new UserNotFoundException();
         if (userService.isFull(command.userId())) throw new FullStorageException();
-
         String resultUrl = fileProcessService.uploadFile(command.file(), command.userId());
-
         fileRepository.save(File.of(command.userId(),
             command.file().getName(),
             resultUrl,
             command.folderId(),
             command.file().getSize()
         ));
-
         Events.raise(new FileUploadedEvent(command));
     }
 
@@ -51,17 +46,18 @@ public class FileService {
     public void fileDelete(FileDeleteCommand command) {
         //todo security 적용하면 변경해야 한다
         if (!userService.isExistUser(command.userId())) throw new UserNotFoundException();
-
-        File file = fileRepository.findById(command.fileId()).orElseThrow(FileNotFoundException::new);
+        File file = fileRepository.findById(command.fileId())
+            .orElseThrow(FileNotFoundException::new);
         fileProcessService.deleteFile(file.getName());
-
+        file.deleted();
         Events.raise(new FileDeletedEvent(command.userId(), file));
     }
 
     //todo 알집다운
     public void fileDownload(FileDownloadCommand command) {
-
+        //todo security 적용하면 변경해야 한다
+        if (!userService.isExistUser(command.userId())) throw new UserNotFoundException();
+        File file = fileRepository.findById(command.fileId()).orElseThrow(FileNotFoundException::new);
+        fileProcessService.downloadFile(file.getPath(), file.getName());
     }
-
-
 }

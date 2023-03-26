@@ -36,7 +36,7 @@ public class User extends BaseTimeEntity {
             0L);
     }
 
-    public User(String name, String userId, String password, Long capacity, Long usedCapacity) {
+    private User(String name, String userId, String password, Long capacity, Long usedCapacity) {
         this.name = name;
         this.userId = userId;
         this.password = password;
@@ -45,6 +45,10 @@ public class User extends BaseTimeEntity {
     }
 
     public void updateStorage(Long size) {
-        this.usedCapacity +=size;
+        this.usedCapacity += size;
+    }
+
+    public Long calculationRemainingCapacity() {
+        return capacity - usedCapacity;
     }
 }

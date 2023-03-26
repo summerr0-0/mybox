@@ -24,4 +24,8 @@ public abstract class BaseTimeEntity {
 
     private LocalDateTime deletedAt;
 
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
 }

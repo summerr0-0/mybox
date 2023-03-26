@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @Getter
@@ -20,9 +21,8 @@ public class File extends BaseTimeEntity {
     private String path;
     private Long folderId;
     private Long size;
-//    String fimeNameExtemtion;
 
-
+    //    String fimeNameExtemtion;
     public static File of(Long userId, String name, String path, Long folderId, Long size) {
         return new File(userId, name, path, folderId, size);
     }
@@ -35,4 +35,7 @@ public class File extends BaseTimeEntity {
         this.size = size;
     }
 
+    public void deleted() {
+        setDeletedAt(LocalDateTime.now());
+    }
 }

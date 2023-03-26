@@ -1,7 +1,7 @@
 package com.numble.mybox.folder.entity;
 
 import com.numble.mybox.common.entity.BaseTimeEntity;
-import com.numble.mybox.common.event.UserJoinedEvent;
+import com.numble.mybox.folder.service.command.FolderCreateCommand;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,12 +20,15 @@ public class Folder extends BaseTimeEntity {
     private String name;
     private Long parentId;
 
-
     public static Folder createRoot(Long userId) {
         return new Folder(userId, "root", null);
     }
 
-    public Folder(Long userId, String name, Long parentId) {
+    public static Folder of(FolderCreateCommand command) {
+        return new Folder(command.userId(), command.name(), command.parentFolderId());
+    }
+
+    private Folder(Long userId, String name, Long parentId) {
         this.userId = userId;
         this.name = name;
         this.parentId = parentId;

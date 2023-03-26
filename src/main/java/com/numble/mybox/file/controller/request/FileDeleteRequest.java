@@ -1,4 +1,4 @@
 package com.numble.mybox.file.controller.request;
 
-public record FileDeleteRequest() {
+public record FileDeleteRequest(Long userId, Long fileId) {
 }
